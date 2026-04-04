@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nouvura | L'excellence numérique redéfinie</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;500;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -15,11 +15,11 @@
             --electric-blue: #3b82f6;
             --deep-purple: #8b5cf6;
             --neon-glow: 0 0 15px rgba(59, 130, 246, 0.5);
-            --glass: rgba(255, 255, 255, 0.03);
+            --glass: rgba(255, 255, 255, 0.05);
             --glass-border: rgba(255, 255, 255, 0.1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
 
         body {
@@ -28,149 +28,184 @@
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
             line-height: 1.6;
+            cursor: none; /* المؤشر المخصص مفعل ولكن لا يحجب النقر */
         }
 
-        /* --- Custom Cursor --- */
+        /* --- Cursor Fix --- */
         #cursor {
             position: fixed; width: 20px; height: 20px; background: var(--electric-blue);
-            border-radius: 50%; pointer-events: none; z-index: 9999; mix-blend-mode: screen;
-            box-shadow: 0 0 20px var(--electric-blue); transition: transform 0.1s ease;
+            border-radius: 50%; pointer-events: none; z-index: 10001; mix-blend-mode: screen;
+            box-shadow: 0 0 20px var(--electric-blue);
         }
         #cursor-follower {
             position: fixed; width: 40px; height: 40px; border: 1px solid var(--deep-purple);
-            border-radius: 50%; pointer-events: none; z-index: 9998; transition: all 0.2s ease-out;
+            border-radius: 50%; pointer-events: none; z-index: 10000; transition: transform 0.2s ease-out;
         }
 
-        /* --- Loader --- */
-        #loader {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-dark);
-            display: flex; justify-content: center; align-items: center; z-index: 10000;
-        }
-        .loader-logo { font-family: 'Orbitron', sans-serif; font-size: 3rem; color: var(--electric-blue); text-shadow: var(--neon-glow); animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.1); } }
-
-        #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        /* --- Canvas Behind Everything --- */
+        #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
 
         /* --- Navigation --- */
         nav {
             position: fixed; top: 0; width: 100%; padding: 20px 5%;
             display: flex; justify-content: space-between; align-items: center;
-            background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(10px); z-index: 1000;
+            background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(12px); z-index: 999;
             border-bottom: 1px solid var(--glass-border);
         }
-        .logo { font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 1.5rem; background: linear-gradient(to right, var(--electric-blue), var(--deep-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .logo { font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 1.5rem; color: var(--electric-blue); text-shadow: var(--neon-glow); }
 
-        /* --- Hero --- */
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 10%; }
-        .hero h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(2.5rem, 8vw, 5rem); margin-bottom: 20px; }
-        .hero p { font-size: 1.2rem; color: #94a3b8; margin-bottom: 40px; }
-        
-        .btn-magnetic {
-            padding: 15px 40px; background: linear-gradient(45deg, var(--electric-blue), var(--deep-purple));
-            border: none; border-radius: 50px; color: white; font-weight: bold; text-decoration: none;
-            text-transform: uppercase; letter-spacing: 2px; box-shadow: var(--neon-glow); transition: 0.3s;
+        .controls { display: flex; gap: 15px; align-items: center; }
+        .lang-switch {
+            background: var(--glass); border: 1px solid var(--glass-border); color: white;
+            padding: 8px 12px; border-radius: 10px; cursor: pointer; outline: none; z-index: 1000;
         }
 
         /* --- Sections --- */
-        section { padding: 100px 10%; min-height: 80vh; }
-        .section-title { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; margin-bottom: 50px; text-align: center; }
+        section { padding: 120px 10%; position: relative; z-index: 10; }
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        .hero h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(3rem, 10vw, 6rem); margin-bottom: 20px; }
+        .hero p { font-size: 1.3rem; color: #94a3b8; max-width: 700px; margin-bottom: 40px; }
 
-        .power-phrase { font-size: clamp(2rem, 5vw, 4rem); font-weight: 900; opacity: 0.1; margin: 40px 0; text-transform: uppercase; transition: 0.8s; }
+        .btn-magnetic {
+            padding: 18px 45px; background: linear-gradient(45deg, var(--electric-blue), var(--deep-purple));
+            border: none; border-radius: 50px; color: white; font-weight: bold; text-decoration: none;
+            text-transform: uppercase; letter-spacing: 2px; box-shadow: var(--neon-glow);
+            display: inline-block; cursor: pointer; position: relative; z-index: 20;
+        }
+
+        .power-phrase { font-size: clamp(1.5rem, 5vw, 3.5rem); font-weight: 900; opacity: 0.1; margin: 40px 0; transition: 0.6s; text-align: center; }
         .power-phrase.active { opacity: 1; color: var(--electric-blue); text-shadow: var(--neon-glow); }
 
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
-        .service-card { background: var(--glass); border: 1px solid var(--glass-border); padding: 40px; border-radius: 20px; text-align: center; backdrop-filter: blur(10px); transition: 0.4s; }
-        .service-card:hover { transform: translateY(-10px); border-color: var(--electric-blue); box-shadow: var(--neon-glow); }
-        .service-card i { font-size: 3rem; margin-bottom: 20px; color: var(--electric-blue); }
+        /* --- Floating Menu --- */
+        .bubble-container { position: fixed; bottom: 30px; right: 30px; z-index: 9999; }
+        .bubble-main {
+            width: 65px; height: 65px; background: var(--electric-blue); border-radius: 50%;
+            display: flex; justify-content: center; align-items: center; box-shadow: var(--neon-glow);
+            cursor: pointer; position: relative; z-index: 10000;
+        }
+        .bubble-menu {
+            position: absolute; bottom: 80px; right: 0; display: none; flex-direction: column; gap: 15px;
+        }
+        .bubble-menu a {
+            width: 55px; height: 55px; background: rgba(139, 92, 246, 0.4); border: 1px solid var(--glass-border);
+            border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            color: white; text-decoration: none; backdrop-filter: blur(10px); transition: 0.3s;
+        }
 
-        /* --- Floating Bubble --- */
-        .bubble-container { position: fixed; bottom: 30px; right: 30px; z-index: 2000; }
-        .bubble-main { width: 65px; height: 65px; background: var(--electric-blue); border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: var(--neon-glow); cursor: pointer; transition: 0.3s; }
-        .bubble-main:hover { transform: scale(1.1); }
-        .bubble-menu { position: absolute; bottom: 80px; right: 0; display: none; flex-direction: column; gap: 15px; }
-        .bubble-menu a { width: 55px; height: 55px; background: rgba(139, 92, 246, 0.2); border: 1px solid var(--glass-border); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; text-decoration: none; backdrop-filter: blur(10px); transition: 0.3s; }
-        .bubble-menu a:hover { background: var(--deep-purple); box-shadow: 0 0 15px var(--deep-purple); }
+        /* --- RTL for Arabic --- */
+        body.rtl { direction: rtl; font-family: 'Tajawal', sans-serif; }
 
-        footer { padding: 50px 10%; text-align: center; border-top: 1px solid var(--glass-border); color: #64748b; }
+        /* --- Loader --- */
+        #loader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-dark);
+            display: flex; justify-content: center; align-items: center; z-index: 100000;
+        }
     </style>
 </head>
 <body>
 
-    <div id="loader"><div class="loader-logo">NOUVURA</div></div>
+    <div id="loader"><h2 style="color:var(--electric-blue); font-family:Orbitron;">NOUVURA...</h2></div>
+    
     <div id="cursor"></div>
     <div id="cursor-follower"></div>
+
     <canvas id="bg-canvas"></canvas>
 
     <nav>
         <div class="logo">NOUVURA</div>
-        <a href="tel:0776532042" class="btn-magnetic" style="padding: 10px 20px; font-size: 0.8rem;">Appeler</a>
+        <div class="controls">
+            <select class="lang-switch" id="langSelect" onchange="changeLanguage()">
+                <option value="fr">Français</option>
+                <option value="en">English</option>
+                <option value="ar">العربية</option>
+            </select>
+            <a href="tel:0776532042" class="btn-magnetic" style="padding: 10px 20px; font-size: 0.7rem;">Call Now</a>
+        </div>
     </nav>
 
     <section class="hero">
-        <h1>NOUVURA</h1>
-        <p>Façonner des expériences au-delà des attentes.</p>
-        <a href="#services" class="btn-magnetic">Nos Services</a>
+        <h1 id="hero-title">NOUVURA</h1>
+        <p id="hero-desc">Façonner des expériences au-delà des attentes.</p>
+        <a href="#about" class="btn-magnetic" id="hero-btn">Découvrir</a>
     </section>
 
     <section id="about">
-        <div class="power-phrase">AU-DELÀ DE L'INNOVATION</div>
-        <div class="power-phrase">PRÉCISION ABSOLUE</div>
-        <div class="power-phrase">PASSION CRÉATIVE</div>
-    </section>
-
-    <section id="services">
-        <h2 class="section-title">Expertises</h2>
-        <div class="services-grid">
-            <div class="service-card">
-                <i class="fas fa-ux-combined"></i>
-                <h3>Design UI/UX</h3>
-                <p>Création d'interfaces modernes et intuitives.</p>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-laptop-code"></i>
-                <h3>Web Dev</h3>
-                <p>Sites performants et optimisés pour le futur.</p>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-rocket"></i>
-                <h3>Branding</h3>
-                <p>Identités visuelles qui marquent les esprits.</p>
-            </div>
-        </div>
+        <div class="power-phrase" id="p1">AU-DELÀ DE L'INNOVATION</div>
+        <div class="power-phrase" id="p2">PRÉCISION ABSOLUE</div>
+        <div class="power-phrase" id="p3">PASSION CRÉATIVE</div>
     </section>
 
     <div class="bubble-container">
         <div class="bubble-menu" id="social-menu">
-            <a href="https://wa.me/213776532042" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-            <a href="https://www.facebook.com/search/top?q=nouvura%20adv" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="mailto:noveleeura@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+            <a href="https://wa.me/213776532042" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.facebook.com/search/top?q=nouvura%20adv" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="mailto:noveleeura@gmail.com"><i class="fas fa-envelope"></i></a>
         </div>
         <div class="bubble-main" onclick="toggleMenu()">
-            <i class="fas fa-plus" id="menu-icon"></i>
+            <i class="fas fa-comment-dots" id="menu-icon" style="font-size: 1.5rem; color: white;"></i>
         </div>
     </div>
 
-    <footer>
-        <p>© 2026 Nouvura | noveleeura@gmail.com | 0776532042</p>
+    <footer style="text-align:center; padding: 40px; border-top: 1px solid var(--glass-border);">
+        <p>© 2026 NOUVURA | 0776532042 | noveleeura@gmail.com</p>
     </footer>
 
     <script>
-        // 1. Loader
-        window.addEventListener('load', () => {
-            gsap.to("#loader", { opacity: 0, duration: 1, onComplete: () => {
-                document.getElementById('loader').style.display = 'none';
-            }});
-        });
+        // 1. Loader Logic
+        window.onload = () => {
+            gsap.to("#loader", { opacity: 0, duration: 0.8, onComplete: () => document.getElementById('loader').remove() });
+        };
 
-        // 2. Custom Cursor
+        // 2. Custom Cursor (Optimized for Clicking)
         const cursor = document.getElementById('cursor');
         const follower = document.getElementById('cursor-follower');
         document.addEventListener('mousemove', (e) => {
             gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.1 });
-            gsap.to(follower, { x: e.clientX - 10, y: e.clientY - 10, duration: 0.3 });
+            gsap.to(follower, { x: e.clientX - 20, y: e.clientY - 20, duration: 0.3 });
         });
 
-        // 3. Background Particles
+        // 3. Language Logic
+        const translations = {
+            fr: {
+                desc: "Façonner des expériences au-delà des attentes.",
+                btn: "Découvrir",
+                p1: "AU-DELÀ DE L'INNOVATION", p2: "PRÉCISION ABSOLUE", p3: "PASSION CRÉATIVE"
+            },
+            en: {
+                desc: "Shaping experiences beyond expectations.",
+                btn: "Discover",
+                p1: "BEYOND INNOVATION", p2: "ABSOLUTE PRECISION", p3: "CREATIVE PASSION"
+            },
+            ar: {
+                desc: "صياغة التجارب بأبعاد تتجاوز التوقعات",
+                btn: "اكتشف المزيد",
+                p1: "ما وراء الابتكار", p2: "دقة مطلقة", p3: "شغف إبداعي"
+            }
+        };
+
+        function changeLanguage() {
+            const lang = document.getElementById('langSelect').value;
+            const content = translations[lang];
+            
+            document.getElementById('hero-desc').innerText = content.desc;
+            document.getElementById('hero-btn').innerText = content.btn;
+            document.getElementById('p1').innerText = content.p1;
+            document.getElementById('p2').innerText = content.p2;
+            document.getElementById('p3').innerText = content.p3;
+
+            if(lang === 'ar') document.body.classList.add('rtl');
+            else document.body.classList.remove('rtl');
+        }
+
+        // 4. Floating Menu
+        function toggleMenu() {
+            const menu = document.getElementById('social-menu');
+            const isVisible = menu.style.display === 'flex';
+            menu.style.display = isVisible ? 'none' : 'flex';
+            if(!isVisible) gsap.from(".bubble-menu a", { y: 20, opacity: 0, stagger: 0.1 });
+        }
+
+        // 5. Particles Background
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
@@ -178,44 +213,19 @@
         class Particle {
             constructor() {
                 this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2; this.speedX = Math.random() * 0.5 - 0.25; this.speedY = Math.random() * 0.5 - 0.25;
+                this.size = Math.random() * 1.5; this.vx = Math.random() * 0.4 - 0.2; this.vy = Math.random() * 0.4 - 0.2;
             }
-            update() { this.x += this.speedX; this.y += this.speedY; if (this.x > canvas.width) this.x = 0; if (this.x < 0) this.x = canvas.width; if (this.y > canvas.height) this.y = 0; if (this.y < 0) this.y = canvas.height; }
-            draw() { ctx.fillStyle = '#3b82f6'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+            draw() { ctx.fillStyle = '#3b82f6'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2); ctx.fill(); }
+            update() { this.x += this.vx; this.y += this.vy; if(this.x<0 || this.x>canvas.width) this.vx *= -1; if(this.y<0 || this.y>canvas.height) this.vy *= -1; }
         }
-        function initParticles() { for (let i = 0; i < 80; i++) particles.push(new Particle()); }
-        function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
-        initParticles(); animate();
+        for(let i=0; i<80; i++) particles.push(new Particle());
+        function anim() { ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p=>{p.update(); p.draw();}); requestAnimationFrame(anim); }
+        anim();
 
-        // 4. GSAP & Scroll
+        // 6. Scroll Effects
         gsap.registerPlugin(ScrollTrigger);
-        document.querySelectorAll('.power-phrase').forEach(phrase => {
-            gsap.to(phrase, { scrollTrigger: { trigger: phrase, start: "top 80%", toggleClass: "active" } });
-        });
-
-        // 5. Toggle Contact Menu
-        function toggleMenu() {
-            const menu = document.getElementById('social-menu');
-            const icon = document.getElementById('menu-icon');
-            if (menu.style.display === 'flex') {
-                menu.style.display = 'none';
-                icon.className = 'fas fa-plus';
-            } else {
-                menu.style.display = 'flex';
-                icon.className = 'fas fa-times';
-                gsap.from(".bubble-menu a", { y: 20, opacity: 0, stagger: 0.1 });
-            }
-        }
-
-        // 6. Magnetic Buttons
-        document.querySelectorAll('.btn-magnetic').forEach(btn => {
-            btn.addEventListener('mousemove', (e) => {
-                const rect = btn.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width/2;
-                const y = e.clientY - rect.top - rect.height/2;
-                gsap.to(btn, { x: x * 0.3, y: y * 0.3, duration: 0.3 });
-            });
-            btn.addEventListener('mouseleave', () => { gsap.to(btn, { x: 0, y: 0, duration: 0.3 }); });
+        document.querySelectorAll('.power-phrase').forEach(el => {
+            gsap.to(el, { scrollTrigger: { trigger: el, start: "top 80%", toggleClass: "active" } });
         });
     </script>
 </body>
