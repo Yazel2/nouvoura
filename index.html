@@ -8,115 +8,48 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;800&display=swap" rel="stylesheet">
 
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-scroll-behavior:smooth;
-}
-
-body{
-background:#050505;
-color:white;
-overflow-x:hidden;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;scroll-behavior:smooth;}
+body{background:#050505;color:white;overflow-x:hidden;}
 
 /* LOADER */
 #loader{
-position:fixed;
-width:100%;
-height:100%;
-background:black;
-display:flex;
-justify-content:center;
-align-items:center;
-z-index:9999;
-font-size:30px;
-color:#ff0033;
+position:fixed;width:100%;height:100%;
+background:black;display:flex;justify-content:center;align-items:center;
+z-index:9999;font-size:30px;color:#ff0033;
 animation:pulse 1s infinite alternate;
 }
-@keyframes pulse{
-from{opacity:0.4}
-to{opacity:1}
-}
+@keyframes pulse{from{opacity:0.4}to{opacity:1}}
 
 /* HEADER */
 header{
-position:fixed;
-width:100%;
-top:0;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px 40px;
-background:rgba(0,0,0,0.6);
-backdrop-filter:blur(10px);
-z-index:999;
+position:fixed;width:100%;top:0;
+display:flex;justify-content:space-between;align-items:center;
+padding:20px 40px;background:rgba(0,0,0,0.6);
+backdrop-filter:blur(10px);z-index:999;
 }
-
-.logo img{
-height:40px;
-}
-
-nav a{
-margin:0 10px;
-color:white;
-text-decoration:none;
-transition:0.3s;
-}
-
-nav a:hover{
-color:#00aaff;
-}
-
-.lang{
-cursor:pointer;
-color:#ff0033;
-margin-left:10px;
-}
+.logo img{height:40px;}
+nav a{margin:0 10px;color:white;text-decoration:none;transition:0.3s;}
+nav a:hover{color:#00aaff;}
+.lang{cursor:pointer;color:#ff0033;margin-left:10px;}
 
 /* HERO */
 .hero{
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
+height:100vh;display:flex;flex-direction:column;
+justify-content:center;align-items:center;text-align:center;
 background:radial-gradient(circle,#000,#020a20);
 }
-
 .hero h1{
 font-size:60px;
 background:linear-gradient(45deg,#ff0033,#00aaff);
--webkit-background-clip:text;
-color:transparent;
+-webkit-background-clip:text;color:transparent;
 animation:fadeUp 1s ease;
 }
-
-.hero p{
-margin-top:20px;
-color:#aaa;
-animation:fadeUp 1.5s ease;
-}
-
-@keyframes fadeUp{
-from{transform:translateY(40px);opacity:0}
-to{transform:translateY(0);opacity:1}
-}
+.hero p{margin-top:20px;color:#aaa;animation:fadeUp 1.5s ease;}
+@keyframes fadeUp{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}
 
 /* SECTION */
-.section{
-padding:100px 40px;
-}
-
-.title{
-text-align:center;
-font-size:40px;
-margin-bottom:50px;
-}
+.section{padding:100px 40px;}
+.title{text-align:center;font-size:40px;margin-bottom:50px;}
 
 /* SERVICES */
 .services{
@@ -124,16 +57,12 @@ display:grid;
 grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
 gap:30px;
 }
-
 .card{
 background:rgba(255,255,255,0.05);
 backdrop-filter:blur(10px);
-padding:30px;
-border-radius:20px;
-text-align:center;
+padding:30px;border-radius:20px;text-align:center;
 transition:0.5s;
 }
-
 .card:hover{
 transform:translateY(-10px) scale(1.05) rotateY(10deg);
 box-shadow:0 0 20px #ff0033;
@@ -145,54 +74,43 @@ display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:20px;
 }
-
 .portfolio img{
-width:100%;
-border-radius:15px;
-transition:0.5s;
+width:100%;border-radius:15px;transition:0.5s;
 }
-
 .portfolio img:hover{
 transform:scale(1.1) rotate(1deg);
 filter:brightness(1.2);
 }
 
 /* CONTACT */
-.contact input, .contact textarea{
-width:80%;
-padding:15px;
-margin:10px;
-border:none;
-border-radius:10px;
+.contact input{
+width:80%;padding:15px;margin:10px;border:none;border-radius:10px;
 }
 
+/* BUTTON */
 button{
-padding:15px 30px;
-margin:10px;
-border:none;
-border-radius:10px;
+padding:15px 30px;margin:10px;
+border:none;border-radius:10px;
 cursor:pointer;
 background:linear-gradient(45deg,#ff0033,#00aaff);
 color:white;
 }
 
+/* ICONS */
+.icons img{
+width:40px;margin:10px;transition:0.3s;
+}
+.icons img:hover{transform:scale(1.2);}
+
 /* YOUTUBE */
 iframe{
-width:100%;
-height:400px;
-border-radius:20px;
-border:none;
+width:100%;height:400px;border:none;border-radius:20px;
 }
 
 /* FOOTER */
 footer{
-text-align:center;
-padding:20px;
-background:black;
-margin-top:50px;
-color:#888;
+text-align:center;padding:20px;background:black;margin-top:50px;color:#888;
 }
-
 </style>
 </head>
 
@@ -240,15 +158,15 @@ Nous sommes une agence créative où l'esthétique rencontre la performance.
 
 <div class="portfolio">
 <img src="Boucheriez.jpg">
-<img src="Menu restaurant .jpg">
-<img src="accesoires Aouto.jpg">
-<img src="agence de voyage (2).jpg">
-<img src="agence de voyage .jpg">
-<img src="coffe .jpg">
-<img src="design de covering automobile.jpg">
-<img src="fast food .jpg">
-<img src="menu .jpg">
-<img src="patisserie .jpg">
+<img src="menu-restaurant.jpg">
+<img src="accesoires-auto.jpg">
+<img src="agence-voyage-2.jpg">
+<img src="agence-voyage.jpg">
+<img src="coffee.jpg">
+<img src="design-covering.jpg">
+<img src="fast-food.jpg">
+<img src="menu.jpg">
+<img src="patisserie.jpg">
 </div>
 
 <p style="text-align:center;margin-top:30px;">
@@ -258,9 +176,7 @@ Nous ne livrons pas de simples fichiers numériques ; nous créons une identité
 
 <section class="section">
 <h2 class="title">YouTube</h2>
-
 <iframe src="https://www.youtube.com/embed?listType=user_uploads&list=Nouvura"></iframe>
-
 </section>
 
 <section class="section contact" id="contact">
@@ -273,6 +189,12 @@ Nous ne livrons pas de simples fichiers numériques ; nous créons une identité
 
 <button onclick="sendWhats()">WhatsApp</button>
 <button onclick="sendMail()">Email</button>
+
+<div class="icons">
+<a href="mailto:yacineiguenene@gmail.com"><img src="mail.png"></a>
+<a href="tel:0776532042"><img src="phone.png"></a>
+<a href="https://wa.me/213776532042"><img src="whatsapp.png"></a>
+</div>
 
 </section>
 
@@ -291,7 +213,6 @@ document.getElementById("loader").style.display="none";
 function sendWhats(){
 let name=document.getElementById("name").value;
 let project=document.getElementById("project").value;
-
 window.open(`https://wa.me/213776532042?text=Nom:${name}%0AProjet:${project}`);
 }
 
@@ -299,7 +220,6 @@ window.open(`https://wa.me/213776532042?text=Nom:${name}%0AProjet:${project}`);
 function sendMail(){
 let name=document.getElementById("name").value;
 let project=document.getElementById("project").value;
-
 window.location.href=`mailto:yacineiguenene@gmail.com?subject=Projet&body=Nom:${name} Projet:${project}`;
 }
 
@@ -322,6 +242,27 @@ about.innerText="Nous sommes une agence créative où l'esthétique rencontre la
 }
 
 }
+
+/* SCROLL ANIMATION */
+const elements = document.querySelectorAll('.card, .portfolio img');
+
+window.addEventListener('scroll', () => {
+elements.forEach(el => {
+let pos = el.getBoundingClientRect().top;
+let screen = window.innerHeight;
+
+if(pos < screen - 100){
+el.style.opacity = 1;
+el.style.transform = "translateY(0)";
+}
+});
+});
+
+elements.forEach(el=>{
+el.style.opacity=0;
+el.style.transform="translateY(50px)";
+el.style.transition="1s";
+});
 
 </script>
 
