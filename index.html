@@ -8,109 +8,99 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;800&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;scroll-behavior:smooth;}
-body{background:#050505;color:white;overflow-x:hidden;}
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;scroll-behavior:smooth;}
+    body{background:#050505;color:white;overflow-x:hidden;}
+    
+    /* LOADER */
+    #loader{
+    position:fixed;width:100%;height:100%;
+    background:black;display:flex;justify-content:center;align-items:center;
+    z-index:9999;font-size:30px;color:#ff0033;
+    animation:pulse 1s infinite alternate;
+    }
+    @keyframes pulse{from{opacity:0.4}to{opacity:1}}
 
-/* LOADER */
-#loader{
-position:fixed;width:100%;height:100%;
-background:black;display:flex;justify-content:center;align-items:center;
-z-index:9999;font-size:30px;color:#ff0033;
-animation:pulse 1s infinite alternate;
-}
-@keyframes pulse{from{opacity:0.4}to{opacity:1}}
+    /* HEADER */
+    header{
+    position:fixed;width:100%;top:0;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:15px 40px;background:rgba(0,0,0,0.8);
+    backdrop-filter:blur(10px);z-index:999;
+    }
+    .logo img{height:45px; display: block;} /* تأكد أن الصورة تظهر */
+    nav a{margin:0 10px;color:white;text-decoration:none;transition:0.3s; font-size: 14px;}
+    nav a:hover{color:#00aaff;}
+    .lang-container {display: flex; gap: 10px; margin-left: 15px;}
+    .lang{cursor:pointer;color:#ff0033; font-weight: bold; font-size: 13px;}
 
-/* HEADER */
-header{
-position:fixed;width:100%;top:0;
-display:flex;justify-content:space-between;align-items:center;
-padding:20px 40px;background:rgba(0,0,0,0.6);
-backdrop-filter:blur(10px);z-index:999;
-}
-.logo img{height:40px;}
-nav a{margin:0 10px;color:white;text-decoration:none;transition:0.3s;}
-nav a:hover{color:#00aaff;}
-.lang{cursor:pointer;color:#ff0033;margin-left:10px;}
+    /* HERO */
+    .hero{
+    height:100vh;display:flex;flex-direction:column;
+    justify-content:center;align-items:center;text-align:center;
+    background:radial-gradient(circle,#000,#020a20);
+    padding: 20px;
+    }
+    .hero h1{
+    font-size: clamp(30px, 8vw, 60px);
+    background:linear-gradient(45deg,#ff0033,#00aaff);
+    -webkit-background-clip:text;color:transparent;
+    animation:fadeUp 1s ease;
+    }
+    .hero p{margin-top:20px;color:#aaa; max-width: 600px;}
 
-/* HERO */
-.hero{
-height:100vh;display:flex;flex-direction:column;
-justify-content:center;align-items:center;text-align:center;
-background:radial-gradient(circle,#000,#020a20);
-}
-.hero h1{
-font-size:60px;
-background:linear-gradient(45deg,#ff0033,#00aaff);
--webkit-background-clip:text;color:transparent;
-animation:fadeUp 1s ease;
-}
-.hero p{margin-top:20px;color:#aaa;animation:fadeUp 1.5s ease;}
-@keyframes fadeUp{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}
+    /* SECTION */
+    .section{padding:100px 40px; max-width: 1200px; margin: auto;}
+    .title{text-align:center;font-size:40px;margin-bottom:50px; color:#ff0033;}
 
-/* SECTION */
-.section{padding:100px 40px;}
-.title{text-align:center;font-size:40px;margin-bottom:50px;}
+    /* SERVICES */
+    .services{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+    }
+    .card{
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(10px);
+    padding:40px 20px;border-radius:20px;text-align:center;
+    border: 1px solid rgba(255,255,255,0.1);
+    transition:0.5s;
+    }
+    .card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 10px 20px rgba(255, 0, 51, 0.3);
+    border-color: #ff0033;
+    }
 
-/* SERVICES */
-.services{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:30px;
-}
-.card{
-background:rgba(255,255,255,0.05);
-backdrop-filter:blur(10px);
-padding:30px;border-radius:20px;text-align:center;
-transition:0.5s;
-}
-.card:hover{
-transform:translateY(-10px) scale(1.05) rotateY(10deg);
-box-shadow:0 0 20px #ff0033;
-}
+    /* PORTFOLIO */
+    .portfolio{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+    }
+    .portfolio img{
+    width:100%; height: 250px; object-fit: cover;
+    border-radius:15px; transition:0.5s; cursor: pointer;
+    }
+    .portfolio img:hover{transform:scale(1.05);}
 
-/* PORTFOLIO */
-.portfolio{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-}
-.portfolio img{
-width:100%;border-radius:15px;transition:0.5s;
-}
-.portfolio img:hover{
-transform:scale(1.1) rotate(1deg);
-filter:brightness(1.2);
-}
+    /* CONTACT */
+    .contact-form{ text-align: center; }
+    .contact input{
+    width: 100%; max-width: 500px; padding:15px; margin:10px auto; 
+    border:none; border-radius:10px; display: block;
+    background: #111; color: white; border: 1px solid #333;
+    }
 
-/* CONTACT */
-.contact input{
-width:80%;padding:15px;margin:10px;border:none;border-radius:10px;
-}
+    /* ICONS */
+    .icons { margin-top: 30px; display: flex; justify-content: center; gap: 20px; }
+    .icons img{ width:35px; filter: invert(1); transition:0.3s; }
+    .icons img:hover{transform:scale(1.2); filter: invert(0.5) sepia(1) saturate(5) hue-rotate(-50deg);}
 
-/* BUTTON */
-button{
-padding:15px 30px;margin:10px;
-border:none;border-radius:10px;
-cursor:pointer;
-background:linear-gradient(45deg,#ff0033,#00aaff);
-color:white;
-}
-
-/* ICONS */
-.icons img{
-width:40px;margin:10px;transition:0.3s;
-}
-.icons img:hover{transform:scale(1.2);}
-
-/* YOUTUBE */
-iframe{
-width:100%;height:400px;border:none;border-radius:20px;
-}
-
-/* FOOTER */
-footer{
-text-align:center;padding:20px;background:black;margin-top:50px;color:#888;
-}
+    /* FOOTER */
+    footer{ text-align:center;padding:40px;background:black; color:#555; font-size: 14px;}
+    
+    /* RTL Support for Arabic */
+    .rtl { direction: rtl; }
 </style>
 </head>
 
@@ -119,151 +109,165 @@ text-align:center;padding:20px;background:black;margin-top:50px;color:#888;
 <div id="loader">NOUVURA</div>
 
 <header>
-<div class="logo">
-<img src="logo.png">
-</div>
+    <div class="logo">
+        <img src="logo.png" alt="Nouvura Logo" onerror="this.src='https://via.placeholder.com/150x50/000000/FFFFFF?text=NOUVURA'">
+    </div>
 
-<nav>
-<a href="#">Accueil</a>
-<a href="#services">Services</a>
-<a href="#portfolio">Portfolio</a>
-<a href="#contact">Contact</a>
-
-<span class="lang" onclick="setLang('fr')">FR</span>
-<span class="lang" onclick="setLang('en')">EN</span>
-<span class="lang" onclick="setLang('ar')">AR</span>
-</nav>
+    <nav>
+        <a href="#" id="nav-home">Accueil</a>
+        <a href="#services" id="nav-services">Services</a>
+        <a href="#contact" id="nav-contact">Contact</a>
+        
+        <div class="lang-container">
+            <span class="lang" onclick="setLang('fr')">FR</span>
+            <span class="lang" onclick="setLang('en')">EN</span>
+            <span class="lang" onclick="setLang('ar')">AR</span>
+        </div>
+    </nav>
 </header>
 
 <section class="hero">
-<h1 id="title">Design inspiré, Solutions connectées.</h1>
-<p id="about">
-Nous sommes une agence créative où l'esthétique rencontre la performance.
-</p>
+    <h1 id="hero-title">Design inspiré, Solutions connectées.</h1>
+    <p id="hero-desc">Nous sommes une agence créative où l'esthétique rencontre la performance.</p>
 </section>
 
 <section class="section" id="services">
-<h2 class="title">Services</h2>
-
-<div class="services">
-<div class="card">Branding & Graphic Design</div>
-<div class="card">Web Development</div>
-<div class="card">UI/UX Design</div>
-<div class="card">Print Solutions</div>
-</div>
+    <h2 class="title" id="services-title">Services</h2>
+    <div class="services">
+        <div class="card" id="srv-1">Branding & Graphic Design</div>
+        <div class="card" id="srv-2">Web Development</div>
+        <div class="card" id="srv-3">UI/UX Design</div>
+        <div class="card" id="srv-4">Print Solutions</div>
+    </div>
 </section>
 
 <section class="section" id="portfolio">
-<h2 class="title">Portfolio</h2>
-
-<div class="portfolio">
-<img src="Boucheriez.jpg">
-<img src="menu-restaurant.jpg">
-<img src="accesoires-auto.jpg">
-<img src="agence-voyage-2.jpg">
-<img src="agence-voyage.jpg">
-<img src="coffee.jpg">
-<img src="design-covering.jpg">
-<img src="fast-food.jpg">
-<img src="menu.jpg">
-<img src="patisserie.jpg">
-</div>
-
-<p style="text-align:center;margin-top:30px;">
-Nous ne livrons pas de simples fichiers numériques ; nous créons une identité palpable.
-</p>
-</section>
-
-<section class="section">
-<h2 class="title">YouTube</h2>
-<iframe src="https://www.youtube.com/embed?listType=user_uploads&list=Nouvura"></iframe>
+    <h2 class="title" id="port-title">Portfolio</h2>
+    <div class="portfolio">
+        <img src="Boucheriez.jpg" alt="Work 1" onerror="this.src='https://via.placeholder.com/400x300?text=Design+1'">
+        <img src="menu-restaurant.jpg" alt="Work 2" onerror="this.src='https://via.placeholder.com/400x300?text=Design+2'">
+        <img src="coffee.jpg" alt="Work 3" onerror="this.src='https://via.placeholder.com/400x300?text=Design+3'">
+        <img src="fast-food.jpg" alt="Work 4" onerror="this.src='https://via.placeholder.com/400x300?text=Design+4'">
+    </div>
 </section>
 
 <section class="section contact" id="contact">
-<h2 class="title">Contact</h2>
+    <h2 class="title" id="contact-title">Contact</h2>
+    <div class="contact-form">
+        <input id="name" placeholder="Nom">
+        <input id="project" placeholder="Votre projet">
+        <button onclick="sendWhats()">WhatsApp</button>
+        <button onclick="sendMail()">Email</button>
+    </div>
 
-<input id="name" placeholder="Nom">
-<input id="project" placeholder="Votre projet">
-
-<br>
-
-<button onclick="sendWhats()">WhatsApp</button>
-<button onclick="sendMail()">Email</button>
-
-<div class="icons">
-<a href="mailto:yacineiguenene@gmail.com"><img src="mail.png"></a>
-<a href="tel:0776532042"><img src="phone.png"></a>
-<a href="https://wa.me/213776532042"><img src="whatsapp.png"></a>
-</div>
-
+    <div class="icons">
+        <a href="mailto:yacineiguenene@gmail.com"><img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Mail"></a>
+        <a href="https://wa.me/213776532042"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="Whatsapp"></a>
+    </div>
 </section>
 
 <footer>
-© Nouvura 2026
+    © Nouvura <span id="year"></span>
 </footer>
 
 <script>
+/* DATE */
+document.getElementById("year").innerText = new Date().getFullYear();
 
 /* LOADER */
 window.onload = () => {
-document.getElementById("loader").style.display="none";
+    setTimeout(() => {
+        document.getElementById("loader").style.display="none";
+    }, 1000);
 }
 
-/* WHATSAPP */
+/* CONTACT FUNCTIONS */
 function sendWhats(){
-let name=document.getElementById("name").value;
-let project=document.getElementById("project").value;
-window.open(`https://wa.me/213776532042?text=Nom:${name}%0AProjet:${project}`);
+    let name = document.getElementById("name").value;
+    let project = document.getElementById("project").value;
+    if(!name) { alert("S'il vous plaît, entrez votre nom"); return; }
+    window.open(`https://wa.me/213776532042?text=Bonjour, je suis ${name}. Mon projet: ${project}`);
 }
 
-/* EMAIL */
 function sendMail(){
-let name=document.getElementById("name").value;
-let project=document.getElementById("project").value;
-window.location.href=`mailto:yacineiguenene@gmail.com?subject=Projet&body=Nom:${name} Projet:${project}`;
+    let name = document.getElementById("name").value;
+    let project = document.getElementById("project").value;
+    window.location.href=`mailto:yacineiguenene@gmail.com?subject=Nouveau Projet&body=Nom: ${name}%0D%0AProjet: ${project}`;
 }
 
-/* TRANSLATION */
+/* TRANSLATION SYSTEM */
+const translations = {
+    en: {
+        navHome: "Home", navServices: "Services", navContact: "Contact",
+        heroTitle: "Inspired Design, Connected Solutions",
+        heroDesc: "We are a creative agency where aesthetics meets performance.",
+        servicesTitle: "Our Services",
+        portTitle: "Portfolio",
+        contactTitle: "Get in Touch",
+        namePlaceholder: "Name",
+        projectPlaceholder: "Your Project"
+    },
+    ar: {
+        navHome: "الرئيسية", navServices: "خدماتنا", navContact: "اتصل بنا",
+        heroTitle: "تصميم ملهم، حلول متصلة",
+        heroDesc: "نحن وكالة إبداعية حيث يلتقي الجمال بالأداء الاحترافي.",
+        servicesTitle: "خدماتنا",
+        portTitle: "أعمالنا",
+        contactTitle: "تواصل معنا",
+        namePlaceholder: "الاسم",
+        projectPlaceholder: "مشروعك"
+    },
+    fr: {
+        navHome: "Accueil", navServices: "Services", navContact: "Contact",
+        heroTitle: "Design inspiré, Solutions connectées.",
+        heroDesc: "Nous sommes une agence créative où l'esthétique rencontre la performance.",
+        servicesTitle: "Services",
+        portTitle: "Portfolio",
+        contactTitle: "Contact",
+        namePlaceholder: "Nom",
+        projectPlaceholder: "Votre projet"
+    }
+};
+
 function setLang(lang){
+    const t = translations[lang];
+    
+    // Update Text
+    document.getElementById("nav-home").innerText = t.navHome;
+    document.getElementById("nav-services").innerText = t.navServices;
+    document.getElementById("nav-contact").innerText = t.navContact;
+    document.getElementById("hero-title").innerText = t.heroTitle;
+    document.getElementById("hero-desc").innerText = t.heroDesc;
+    document.getElementById("services-title").innerText = t.servicesTitle;
+    document.getElementById("port-title").innerText = t.portTitle;
+    document.getElementById("contact-title").innerText = t.contactTitle;
+    document.getElementById("name").placeholder = t.namePlaceholder;
+    document.getElementById("project").placeholder = t.projectPlaceholder;
 
-if(lang=="en"){
-title.innerText="Inspired Design, Connected Solutions";
-about.innerText="We are a creative agency where aesthetics meets performance.";
-}
-
-if(lang=="ar"){
-title.innerText="تصميم ملهم، حلول متصلة";
-about.innerText="نحن وكالة إبداعية حيث يلتقي الجمال بالأداء.";
-}
-
-if(lang=="fr"){
-title.innerText="Design inspiré, Solutions connectées.";
-about.innerText="Nous sommes une agence créative où l'esthétique rencontre la performance.";
-}
-
+    // Handle RTL
+    if(lang === 'ar') {
+        document.body.classList.add('rtl');
+    } else {
+        document.body.classList.remove('rtl');
+    }
 }
 
 /* SCROLL ANIMATION */
-const elements = document.querySelectorAll('.card, .portfolio img');
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+        }
+    });
+}, { threshold: 0.1 });
 
-window.addEventListener('scroll', () => {
-elements.forEach(el => {
-let pos = el.getBoundingClientRect().top;
-let screen = window.innerHeight;
-
-if(pos < screen - 100){
-el.style.opacity = 1;
-el.style.transform = "translateY(0)";
-}
+document.querySelectorAll('.card, .portfolio img').forEach(el => {
+    el.style.opacity = "0";
+    el.style.transform = "translateY(30px)";
+    el.style.transition = "0.8s ease-out";
+    observer.observe(el);
 });
-});
-
-elements.forEach(el=>{
-el.style.opacity=0;
-el.style.transform="translateY(50px)";
-el.style.transition="1s";
-});
-
 </script>
 
 </body>
