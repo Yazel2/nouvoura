@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -9,7 +10,7 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;scroll-behavior:smooth;}
-body{background:#050505;color:white;overflow-x:hidden;}
+body{background:#050505;color:white;overflow-x:hidden;transition:background 0.3s;}
 
 /* LOADER */
 #loader{
@@ -17,6 +18,7 @@ position:fixed;width:100%;height:100%;
 background:black;display:flex;justify-content:center;align-items:center;
 z-index:9999;font-size:30px;color:#ff0033;
 animation:pulse 1s infinite alternate;
+transition: opacity 0.5s ease;
 }
 @keyframes pulse{from{opacity:0.4}to{opacity:1}}
 
@@ -28,8 +30,8 @@ padding:15px 40px;background:rgba(0,0,0,0.8);
 backdrop-filter:blur(10px);z-index:999;
 }
 .logo img{height:45px;}
-nav a{margin:0 10px;color:white;text-decoration:none;transition:0.3s;font-size:14px;}
-nav a:hover{color:#00aaff;}
+nav a{margin:0 10px;color:white;text-decoration:none;transition:color 0.3s, transform 0.3s;font-size:14px;}
+nav a:hover{color:#00aaff;transform:scale(1.05);}
 .lang-container {display:flex;gap:10px;margin-left:15px;}
 .lang{cursor:pointer;color:#ff0033;font-weight:bold;font-size:13px;}
 
@@ -68,7 +70,8 @@ background:rgba(255,255,255,0.05);
 backdrop-filter:blur(10px);
 padding:40px 20px;border-radius:20px;text-align:center;
 border:1px solid rgba(255,255,255,0.1);
-transition:0.4s;
+transition:0.4s, transform 0.4s;
+cursor:default;
 }
 .card:hover{
 transform:translateY(-10px) scale(1.02);
@@ -94,7 +97,9 @@ border-radius:15px;transition:0.5s;cursor:pointer;
 width:100%;max-width:500px;padding:15px;margin:10px auto;
 border:none;border-radius:10px;display:block;
 background:#111;color:white;border:1px solid #333;
+transition: border 0.3s;
 }
+.contact input:focus{border-color:#ff0033;outline:none;}
 button{
 padding:12px 20px;margin:10px;border:none;border-radius:10px;
 cursor:pointer;background:#ff0033;color:white;transition:0.3s;
@@ -120,7 +125,7 @@ footer{text-align:center;padding:40px;background:black;color:#555;font-size:14px
 
 <header>
 <div class="logo">
-<img src="logo.png" onerror="this.src='https://via.placeholder.com/150x50?text=NOUVURA'">
+<img src="logo.png" alt="Logo Nouvura" onerror="this.src='https://via.placeholder.com/150x50?text=NOUVURA'">
 </div>
 
 <nav>
@@ -154,10 +159,10 @@ footer{text-align:center;padding:40px;background:black;color:#555;font-size:14px
 <section class="section" id="portfolio">
 <h2 class="title" id="port-title">Portfolio</h2>
 <div class="portfolio">
-<img src="Boucheriez.jpg" onerror="this.src='https://via.placeholder.com/400x300?text=Design+1'">
-<img src="menu-restaurant.jpg" onerror="this.src='https://via.placeholder.com/400x300?text=Design+2'">
-<img src="coffee.jpg" onerror="this.src='https://via.placeholder.com/400x300?text=Design+3'">
-<img src="fast-food.jpg" onerror="this.src='https://via.placeholder.com/400x300?text=Design+4'">
+<img src="Boucheriez.jpg" alt="Design 1" onerror="this.src='https://via.placeholder.com/400x300?text=Design+1'">
+<img src="menu-restaurant.jpg" alt="Design 2" onerror="this.src='https://via.placeholder.com/400x300?text=Design+2'">
+<img src="coffee.jpg" alt="Design 3" onerror="this.src='https://via.placeholder.com/400x300?text=Design+3'">
+<img src="fast-food.jpg" alt="Design 4" onerror="this.src='https://via.placeholder.com/400x300?text=Design+4'">
 </div>
 </section>
 
@@ -166,13 +171,13 @@ footer{text-align:center;padding:40px;background:black;color:#555;font-size:14px
 <div class="contact-form">
 <input id="name" placeholder="Nom">
 <input id="project" placeholder="Votre projet">
-<button onclick="sendWhats()">WhatsApp</button>
-<button onclick="sendMail()">Email</button>
+<button type="button" onclick="sendWhats()">WhatsApp</button>
+<button type="button" onclick="sendMail()">Email</button>
 </div>
 
 <div class="icons">
-<a href="mailto:yacineiguenene@gmail.com"><img src="https://cdn-icons-png.flaticon.com/512/732/732200.png"></a>
-<a href="https://wa.me/213776532042"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png"></a>
+<a href="mailto:yacineiguenene@gmail.com"><img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email Icon"></a>
+<a href="https://wa.me/213776532042"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp Icon"></a>
 </div>
 </section>
 
@@ -183,52 +188,24 @@ footer{text-align:center;padding:40px;background:black;color:#555;font-size:14px
 <script>
 document.getElementById("year").innerText=new Date().getFullYear();
 
+// Loader fade out
 window.addEventListener("load",()=>{
-setTimeout(()=>{document.getElementById("loader").style.display="none";},800);
+    setTimeout(()=>{
+        const loader = document.getElementById("loader");
+        loader.style.opacity = "0";
+        setTimeout(()=> loader.style.display = "none", 500);
+    }, 800);
 });
 
+// Contact functions
 function sendWhats(){
-let name=document.getElementById("name").value;
-let project=document.getElementById("project").value;
-if(!name||!project){alert("Remplissez tous les champs !");return;}
-window.open(`https://wa.me/213776532042?text=${encodeURIComponent(`Bonjour, je suis ${name}. Mon projet: ${project}`)}`);
+    let name = document.getElementById("name").value.trim();
+    let project = document.getElementById("project").value.trim();
+    if(!name || !project){ alert("Remplissez tous les champs !"); return; }
+    window.open(`https://wa.me/213776532042?text=${encodeURIComponent(`Bonjour, je suis ${name}. Mon projet: ${project}`)}`);
 }
 
 function sendMail(){
-let name=document.getElementById("name").value;
-let project=document.getElementById("project").value;
-window.location.href=`mailto:yacineiguenene@gmail.com?subject=Nouveau Projet&body=Nom: ${name}%0D%0AProjet: ${project}`;
-}
-
-const translations={
-en:{navHome:"Home",navServices:"Services",navContact:"Contact",heroTitle:"Inspired Design, Connected Solutions",heroDesc:"We are a creative agency where aesthetics meets performance."},
-ar:{navHome:"الرئيسية",navServices:"خدماتنا",navContact:"اتصل بنا",heroTitle:"تصميم ملهم، حلول متصلة",heroDesc:"نحن وكالة إبداعية حيث يلتقي الجمال بالأداء."}
-};
-
-function setLang(lang){
-if(lang==='ar'){document.body.classList.add('rtl');}else{document.body.classList.remove('rtl');}
-if(!translations[lang])return;
-let t=translations[lang];
-document.getElementById("nav-home").innerText=t.navHome;
-document.getElementById("nav-services").innerText=t.navServices;
-document.getElementById("nav-contact").innerText=t.navContact;
-document.getElementById("hero-title").innerText=t.heroTitle;
-document.getElementById("hero-desc").innerText=t.heroDesc;
-}
-
-const observer=new IntersectionObserver((entries)=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){entry.target.style.opacity="1";entry.target.style.transform="translateY(0)";}
-});
-},{threshold:0.1});
-
-document.querySelectorAll('.card, .portfolio img').forEach(el=>{
-el.style.opacity="0";
-el.style.transform="translateY(30px)";
-el.style.transition="0.8s";
-observer.observe(el);
-});
-</script>
-
-</body>
-</html>
+    let name = document.getElementById("name").value.trim();
+    let project = document.getElementById("
+```
